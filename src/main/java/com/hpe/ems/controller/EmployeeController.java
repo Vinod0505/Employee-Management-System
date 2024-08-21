@@ -26,22 +26,22 @@ public class EmployeeController {
 		this.employeeService = employeeService;
 	}
 
-	@PostMapping("employees/add")
+	@PostMapping("employees")
 	public ResponseEntity<ResponseStructure<Employee>> addEmployee(@RequestBody Employee employee){
 		return employeeService.addEmployee(employee);
 	}
 
-	@PutMapping("employees/update/{employeeId}")
+	@PutMapping("employees/{employeeId}")
 	public ResponseEntity<ResponseStructure<Employee>> updateEmployee(@RequestBody Employee updatedEmployee,@PathVariable long employeeId){
 		return employeeService.updateEmployee(updatedEmployee,employeeId);
 	}
 
-	@GetMapping("employees/allEmployees")
+	@GetMapping("/employees")
 	public ResponseEntity<ResponseStructure<List<Employee>>> listOfEmployees(){
 		return employeeService.listOfEmployees();
 	}
 
-	@DeleteMapping("employees/delete/{employeeId}")
+	@DeleteMapping("employees/{employeeId}")
 	public ResponseEntity<ResponseStructure<Employee>> deleteEmployee(@PathVariable long employeeId){
 		return employeeService.deleteEmployee(employeeId);
 	}
