@@ -71,4 +71,19 @@ public class EmployeeServiceImpl implements EmployeeService{
 		}
 	}
 
+
+	@Override
+	public ResponseEntity<ResponseStructure<Employee>> deleteEmployee(long employeeId) {
+		return employeeRepo.findById(employeeId)
+				.map(employee->{
+					employeeRepo.delete(employee);
+					return ResponseEntity.ok(
+							responseStructure.setStatusCode(HttpStatus.OK.value())
+							.setMessage("Employee object deleted Successfully")
+							.setData(employee)
+							);
+				})
+				.orElseThrow(()-> new EmployeeNotFoundByIdException("Employee not found"));
+	}
+
 }

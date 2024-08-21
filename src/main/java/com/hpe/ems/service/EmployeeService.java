@@ -15,5 +15,7 @@ public interface EmployeeService {
 
 	ResponseEntity<ResponseStructure<List<Employee>>> listOfEmployees();
 
+	ResponseEntity<ResponseStructure<Employee>> deleteEmployee(long employeeId);
+
 	
 }
