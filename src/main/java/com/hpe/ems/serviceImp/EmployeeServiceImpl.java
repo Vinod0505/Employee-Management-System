@@ -1,10 +1,13 @@
 package com.hpe.ems.serviceImp;
 
+import java.util.List;
+
 import org.springframework.http.HttpStatus; 
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.hpe.ems.exception.EmployeeNotFoundByIdException;
+import com.hpe.ems.exception.EmployeesNotFoundException;
 import com.hpe.ems.model.Employee;
 import com.hpe.ems.repo.EmployeeRepo;
 import com.hpe.ems.service.EmployeeService;
@@ -15,11 +18,13 @@ public class EmployeeServiceImpl implements EmployeeService{
 
 	private EmployeeRepo employeeRepo;
 	private ResponseStructure<Employee> responseStructure;
+	private ResponseStructure<List<Employee>> structure;
 
-	public EmployeeServiceImpl(EmployeeRepo employeeRepo,ResponseStructure<Employee> responseStructure) {
+	public EmployeeServiceImpl(EmployeeRepo employeeRepo,ResponseStructure<Employee> responseStructure,ResponseStructure<List<Employee>> structure) {
 		super();
 		this.employeeRepo = employeeRepo;
 		this.responseStructure=responseStructure;
+		this.structure=structure;
 	}
 
 
@@ -48,6 +53,22 @@ public class EmployeeServiceImpl implements EmployeeService{
 
 				})
 				.orElseThrow(()->new EmployeeNotFoundByIdException("Employee object not found"));
+	}
+
+
+	@Override
+	public ResponseEntity<ResponseStructure<List<Employee>>> listOfEmployees() {
+
+		List<Employee> employees = employeeRepo.findAll();
+		if(employees.isEmpty())
+			throw new EmployeesNotFoundException("List is Empty");
+		else {
+			return ResponseEntity.ok(
+					structure.setStatusCode(HttpStatus.FOUND.value())
+					.setMessage("List of Employees Found")
+					.setData(employees)
+					);
+		}
 	}
 
 }
