@@ -9,5 +9,7 @@ public interface EmployeeService {
 
 	ResponseEntity<ResponseStructure<Employee>> addEmployee(Employee employee);
 
+	ResponseEntity<ResponseStructure<Employee>> updateEmployee(Employee updatedEmployee,long employeeId);
+
 	
 }
