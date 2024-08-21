@@ -1,6 +1,9 @@
 package com.hpe.ems.controller;
 
+import java.util.List;
+
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -30,5 +33,10 @@ public class EmployeeController {
 	@PutMapping("employees/update/{employeeId}")
 	public ResponseEntity<ResponseStructure<Employee>> updateEmployee(@RequestBody Employee updatedEmployee,@PathVariable long employeeId){
 		return employeeService.updateEmployee(updatedEmployee,employeeId);
+	}
+	
+	@GetMapping("employees/allEmployees")
+	public ResponseEntity<ResponseStructure<List<Employee>>> listOfEmployees(){
+		return employeeService.listOfEmployees();
 	}
 }
