@@ -32,10 +32,10 @@ public class EmployeeServiceImpl implements EmployeeService{
 	public ResponseEntity<ResponseStructure<Employee>> addEmployee(Employee employee) {
 		employeeRepo.save(employee);
 		responseStructure = new ResponseStructure<Employee>();
-		responseStructure.setStatusCode(HttpStatus.CREATED.value());
+		responseStructure.setStatusCode(HttpStatus.OK.value());
 		responseStructure.setMessage("Employee added Succesfully");
 		responseStructure.setData(employee);
-		return new ResponseEntity<ResponseStructure<Employee>>(responseStructure,HttpStatus.CREATED);
+		return new ResponseEntity<ResponseStructure<Employee>>(responseStructure,HttpStatus.OK);
 	}
 
 
