@@ -26,7 +26,7 @@ public class EmployeeController {
 		this.employeeService = employeeService;
 	}
 
-	@PostMapping("employees")
+	@PostMapping("employees/add")
 	public ResponseEntity<ResponseStructure<Employee>> addEmployee(@RequestBody Employee employee){
 		return employeeService.addEmployee(employee);
 	}
@@ -36,7 +36,7 @@ public class EmployeeController {
 		return employeeService.updateEmployee(updatedEmployee,employeeId);
 	}
 
-	@GetMapping("/employees")
+	@GetMapping("employees/getlist")
 	public ResponseEntity<ResponseStructure<List<Employee>>> listOfEmployees(){
 		return employeeService.listOfEmployees();
 	}
